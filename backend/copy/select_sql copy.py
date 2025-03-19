@@ -104,11 +104,10 @@ def insert_into(model, insert_values):
 if __name__ == "__main__":
     aim_target = '抢救次数'
     # 元数据类型修改，更新指标类型【时间、字符串、数值、类型、主键】
-    # df_all_columns = query_data(IndexRobotColumn, filters=[IndexRobotColumn.data_type == '4'])
-    # print("所有列查询结果:", df_all_columns.T, sep='\n')
+    df_all_columns = query_data(IndexRobotColumn, filters=[IndexRobotColumn.data_type == '4'])
+    print("所有列查询结果:", df_all_columns.T, sep='\n')
 
     # 获取字段信息，IndexRobotColumn,传入字段/中文名，查询相关信息
-    aim_target = '抢救次数'
     df_column = query_data(IndexRobotColumn, filters=[IndexRobotColumn.column_remark == aim_target])
     print("所有列名:", df_column.columns, sep='\n')
     print("所有列查询结果:", df_column.T, sep='\n')
@@ -279,34 +278,3 @@ if __name__ == "__main__":
                 print(f"维度数据插入成功，行索引: {index}，表 ID: {table_id}")
             else:
                 print(f"维度数据插入失败，行索引: {index}，表 ID: {table_id}")
-
-    # 获取字段信息，IndexRobotColumn,传入字段/中文名，查询相关信息
-    aim_target = '科室编码'
-    table_name = 'hospital_cmis_cmi_group_dept'
-    df_column = query_data(IndexRobotColumn, filters=[or_(IndexRobotColumn.column_remark == aim_target,
-                                                           IndexRobotColumn.table_name == table_name)])
-    print("所有列名:", df_column.columns, sep='\n')
-    print("所有列查询结果:", df_column.T, sep='\n')
-
-    # 获取database_id、schema_id、table_id、
-    database_id = df_column['database_id'].values[0]
-    schema_id = df_column['schema_id'].values[0]
-    table_id = df_column['table_id'].values[0]
-    table_name = df_column['table_name'].values[0]
-    print(f'database_id : {database_id}', f'schema_id : {schema_id}', 
-          f'table_id : {table_id}', f'table_name : {table_name}',sep='\n')
-    
-
-
-sudo dpkg -i mysql-community-client-plugins_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i mysql-community-client-core_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i mysql-common_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i mysql-community-client_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i libmysqlclient21_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i libmysqlclient-dev_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i mysql-client_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i libaio1_0.3.112-5_amd64.deb
-sudo dpkg -i libmecab2_0.996-10build1_amd64.deb
-sudo dpkg -i mysql-community-server-core_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i mysql-community-server_8.0.41-1ubuntu22.04_amd64.deb
-sudo dpkg -i mysql-server_8.0.41-1ubuntu22.04_amd64.deb
